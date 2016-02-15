@@ -1,0 +1,116 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly MessengerCLR, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Windows, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class MessengerCLR.SecurityPolicyCLR: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MessengerCLR.SecurityPolicyCLR): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(Int32, System.Collections.Generic.List`1[System.Byte] ByRef): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 encryptionAlgo : Public
+    System.Collections.Generic.List`1[System.Byte] encryptionPubKey : Public
+Class MessengerCLR.UserCLR: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String identifier : Public
+    MessengerCLR.SecurityPolicyCLR securityPolicy : Public
+Class MessengerCLR.MessengerSettingsCLR: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MessengerCLR.MessengerSettingsCLR): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String, UInt16): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String serverURL : Public
+    UInt16 serverPort : Public
+Class MessengerCLR.MessageContentCLR: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MessengerCLR.MessageContentCLR): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 type : Public
+    Boolean encrypted : Public
+    System.Collections.Generic.List`1[System.Byte] data : Public
+Class MessengerCLR.MessageCLR: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MessengerCLR.MessageCLR): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String identifier : Public
+    Int64 time : Public
+    MessengerCLR.MessageContentCLR content : Public
+Struct MessengerCLR.Callbacks.Native.LoginCallback: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+Struct MessengerCLR.Callbacks.Native.RequestUsersCallback: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+Class MessengerCLR.Callbacks.CLR.LoginCallbackRegistrator: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Reg(LoginCallback*, Action`1): PrivateScope, Public, Static, HideBySig
+    Trigger(LoginCallback*, Int32): PrivateScope, Public, Static, HideBySig
+    Cancel(LoginCallback*): PrivateScope, Public, Static, HideBySig
+Class MessengerCLR.Callbacks.CLR.RequestUsersCallbackRegistrator: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Collections.Generic.Dictionary`2[System.UInt32,System.Action`2[MessengerCLR.Enums.operation_result,System.Collections.Generic.List`1[MessengerCLR.UserCLR]]] dictionary IsByValue : Public, Static, InitOnly
+  Methods:
+    Reg(RequestUsersCallback*, Action`2): PrivateScope, Public, Static, HideBySig
+    Trigger(RequestUsersCallback*, Int32, List`1): PrivateScope, Public, Static, HideBySig
+    Cancel(RequestUsersCallback*): PrivateScope, Public, Static, HideBySig
+Struct MessengerCLR.Observers.Native.MessagesObserver: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Sealed, BeforeFieldInit
+  :System.ValueType
+Class MessengerCLR.Observers.CLR.MessagesObserverRegistrator: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Reg(MessagesObserver*, Action`2, Action`2): PrivateScope, Public, Static, HideBySig
+    Trigger_Received(MessagesObserver*, String, MessageCLR): PrivateScope, Public, Static, HideBySig
+    Trigger_StatusChanged(MessagesObserver*, String, Int32): PrivateScope, Public, Static, HideBySig
+    Cancel(MessagesObserver*): PrivateScope, Public, Static, HideBySig
+Class MessengerCLR.Messenger: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(MessengerCLR.MessengerSettingsCLR): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Login(String, String, SecurityPolicyCLR, Action`1): PrivateScope, Public, HideBySig
+    Disconnect(): PrivateScope, Public, HideBySig
+    RequestActiveUsers(Action`2): PrivateScope, Public, HideBySig
+    SendMessage(String, MessageContentCLR): PrivateScope, Public, HideBySig
+    SendMessageSeen(String, String): PrivateScope, Public, HideBySig
+    RegisterObserver(Action`2, Action`2): PrivateScope, Public, HideBySig
+Struct MessengerCLR.Enums.operation_result: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    MessengerCLR.Enums.operation_result Ok = 0 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.operation_result AuthError = 1 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.operation_result NetworkError = 2 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.operation_result InternalError = 3 : Public, Static, Literal, HasDefault
+Struct MessengerCLR.Enums.message_status: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    MessengerCLR.Enums.message_status Sending = 0 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_status Sent = 1 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_status FailedToSend = 2 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_status Delivered = 3 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_status Seen = 4 : Public, Static, Literal, HasDefault
+Struct MessengerCLR.Enums.message_content_type: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    MessengerCLR.Enums.message_content_type Text = 0 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_content_type Image = 1 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.message_content_type Video = 2 : Public, Static, Literal, HasDefault
+Struct MessengerCLR.Enums.encryption_algorithm: AutoLayout, AnsiClass, Class, Public, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    MessengerCLR.Enums.encryption_algorithm None = 0 : Public, Static, Literal, HasDefault
+    MessengerCLR.Enums.encryption_algorithm RSA_1024 = 1 : Public, Static, Literal, HasDefault
